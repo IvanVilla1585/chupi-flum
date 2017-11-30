@@ -1,0 +1,29 @@
+version: '3'
+
+volumes:
+  mongo:
+    driver: local
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    volumes:
+      - mongo:/data/db
+
+  users:
+    container_name: users
+    build: ./services/users
+    links:
+      - mongo
+    environment:
+      MONGO_URL: "mongodb://mongo/chupiflum"
+      SEND_GRID_API_KEY: "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"
+
+  api-master:
+    container_name: api-master
+    build: ./api-master
+    environment:
+      MONGO_URL: "mongodb://mongo/chupiflum"
+      USER_URL: "http://users:3000"
+      SEND_GRID_API_KEY: "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"

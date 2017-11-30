@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  mongo:
+    ports:
+      - 27017:27017
+
+  users:
+    ports:
+      - 3000:3000
+
+  api-master:
+    ports:
+      - 8081:6379
