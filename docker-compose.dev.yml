@@ -9,6 +9,10 @@ services:
     ports:
       - 3000:3000
 
+  category:
+    ports:
+      - 3001:3001
+
   api-master:
     ports:
       - 8081:6379
