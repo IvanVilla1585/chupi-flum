@@ -14,6 +14,7 @@ import { execute, subscribe } from 'graphql';
 
 // import connectors
 import UserConnector from './users/connector';
+import CategoryConnector from './categories/connector';
 
 import Email from '../email';
 import {SetupAuth} from './auth';
@@ -53,6 +54,7 @@ export function run(port: string | number) {
           viewer: user, // logged user
           sendGrid: new Email(config.sengrig_api_key),
           userConnector: new UserConnector(config.userUrl), // send instance to context
+          categoryConnector: new CategoryConnector(config.categoryUrl), // send instance to context
         },
       };
     })
