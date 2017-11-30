@@ -20,10 +20,19 @@ services:
       MONGO_URL: "mongodb://mongo/chupiflum"
       SEND_GRID_API_KEY: "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"
 
+  category:
+    container_name: category
+    build: ./services/categories
+    links:
+      - mongo
+    environment:
+      MONGO_URL: "mongodb://mongo/chupiflum"
+
   api-master:
     container_name: api-master
     build: ./api-master
     environment:
       MONGO_URL: "mongodb://mongo/chupiflum"
       USER_URL: "http://users:3000"
+      CATEGORY_URL: "http://category:3001"
       SEND_GRID_API_KEY: "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"

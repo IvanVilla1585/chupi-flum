@@ -1,5 +1,3 @@
-// @flow
-import { is_admin } from '../helpers/permissions';
 
 const resolvers = {
   Query: {

@@ -7,6 +7,8 @@ import { makeExecutableSchema } from 'graphql-tools';
 //import user
 import userSchema from './users/schema';
 import userResolvers from './users/resolvers';
+import categorySchema from './categories/schema';
+import categoryResolvers from './categories/resolvers';
 
 const rootSchema = [`
   type Query {
@@ -36,10 +38,10 @@ const rootResolvers = {
 // Put schema together into one array of schema strings
 // and one map of resolvers, like makeExecutableSchema expects
 const schema = [
-  ...rootSchema, ...userSchema
+  ...rootSchema, ...userSchema, ...categorySchema
 ];
 const resolvers = merge(
-  rootResolvers, userResolvers
+  rootResolvers, userResolvers, categoryResolvers
 );
 
 const executableSchema = makeExecutableSchema({
