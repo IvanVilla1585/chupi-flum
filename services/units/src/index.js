@@ -77,15 +77,32 @@ hash.set('PUT /:id', db(async (req, res, params) => {
 }));
 
 /*
-  * UNITS Update status (INACTIVE)
-  * PUT /remove/:id
+  * UNITS delete
+  * DELETE /:id
   * params: @id
   */
 hash.set('DELETE /:id', db(async (req, res, params) => {
   const { Model } = req;
   const data = { status: 'INACTIVE' };
 
-  const resp = await Model.findById(params.id).remove();
+  const resp = await Model.findById(params.id);
+  await resp.remove();
+
+  send(res, 200, resp);
+}));
+
+/*
+  * UNITS Update status
+  * PUT /status/:id
+  * params: @id
+  */
+hash.set('PUT /status/:id', db(async (req, res, params) => {
+  const { Model } = req;
+  const {status} = req.body;
+  const data = { status };
+
+  const resp = await Model.findById(params.id);
+  await resp.remove();
 
   send(res, 200, resp);
 }));
