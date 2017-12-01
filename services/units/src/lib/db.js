@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Promise = require('bluebird');
 const config = require('../config');
 require('./model');
 
@@ -8,7 +7,7 @@ const db = fn => async(req, res, params) => {
 	const conn = await mongoose.createConnection(config.db, options);
 
 	// expose connection
-	req.Model = conn.model('UNITS');
+	req.Model = conn.model('Unit');
 
 	// close connection
 	res.on('finish', () => {
