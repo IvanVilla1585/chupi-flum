@@ -36,6 +36,14 @@ services:
     environment:
       MONGO_URL: "mongodb://mongo/chupiflum"
 
+  presentation:
+    container_name: presentation
+    build: ./services/presentations
+    links:
+      - mongo
+    environment:
+      MONGO_URL: "mongodb://mongo/chupiflum"
+
   api-master:
     container_name: api-master
     build: ./api-master
@@ -44,4 +52,5 @@ services:
       USER_URL: "http://users:3000"
       CATEGORY_URL: "http://category:3001"
       UNIT_URL: "http://unit:3002"
+      PRESENTATION_URL: "http://presentation:3003"
       SEND_GRID_API_KEY: "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"
