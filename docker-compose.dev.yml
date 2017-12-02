@@ -25,6 +25,10 @@ services:
     ports:
       - 3004:3004
 
+  process:
+    ports:
+      - 3005:3005
+
   api-master:
     ports:
       - 8082:6379

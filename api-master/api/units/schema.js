@@ -54,7 +54,7 @@ const schema = [`
     # delete unit
     unitDelete(id: ID): Unit
     # update status unit
-    unitStatus(id: ID!, status:   String): Unit
+    unitStatus(id: ID!, status: STATUS): Unit
   }
 `];
 
