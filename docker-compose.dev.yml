@@ -19,4 +19,4 @@ services:
 
   api-master:
     ports:
-      - 8081:6379
+      - 8082:6379
