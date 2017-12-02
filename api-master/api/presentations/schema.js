@@ -1,11 +1,6 @@
 
 const schema = [`
 
-  enum STATUS_PRE {
-    ACTIVE,
-    INACTIVE
-  }
-
   # data to create presentation
   input PresentationInput {
     # presentation name
@@ -29,7 +24,7 @@ const schema = [`
     # presentation description
     description: String,
     # presentation status
-    status: STATUS_PRE,
+    status: STATUS,
     createdAt: String
   }
   

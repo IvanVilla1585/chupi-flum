@@ -17,6 +17,7 @@ import UserConnector from './users/connector';
 import CategoryConnector from './categories/connector';
 import UnitConnector from './units/connector';
 import PresentationsConnector from './presentations/connector';
+import MachineConnector from './machines/connector';
 
 import Email from '../email';
 import {SetupAuth} from './auth';
@@ -58,7 +59,8 @@ export function run(port: string | number) {
           userConnector: new UserConnector(config.userUrl),
           categoryConnector: new CategoryConnector(config.categoryUrl),
           unitConnector: new UnitConnector(config.unitUrl),
-          presentationConnector: new PresentationsConnector(config.presentationUrl)
+          presentationConnector: new PresentationsConnector(config.presentationUrl),
+          machineConnector: new MachineConnector(config.machineUrl)
         },
       };
     })

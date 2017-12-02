@@ -4,7 +4,7 @@ enum userTypes {
   OTHER
 }
 
-enum userStatus {
+enum STATUS {
   ACTIVE
   INACTIVE
 }
@@ -43,6 +43,7 @@ type User {
   address: String,
   type: userTypes,
   rol: String,
+  status: STATUS,
   address: String,
   email: String!,
   createdAt: String,
@@ -67,7 +68,7 @@ extend type Mutation {
   userDelete(id: ID!): User
   
   # attempt to inactivate the user
-  userStatus(id: ID!, status: userStatus): User
+  userStatus(id: ID!, status: STATUS): User
 }
 `];
 

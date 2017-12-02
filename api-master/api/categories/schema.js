@@ -32,7 +32,7 @@ const schema = [`
     # category description
     description: String,
     code: CODE,
-    status: Boolean
+    status: STATUS
   }
   
   extend type Query {

@@ -21,7 +21,7 @@ services:
       SEND_GRID_API_KEY: "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"
 
   category:
-    container_name: category
+    container_name: categories
     build: ./services/categories
     links:
       - mongo
@@ -29,7 +29,7 @@ services:
       MONGO_URL: "mongodb://mongo/chupiflum"
 
   unit:
-    container_name: unit
+    container_name: units
     build: ./services/units
     links:
       - mongo
@@ -37,8 +37,16 @@ services:
       MONGO_URL: "mongodb://mongo/chupiflum"
 
   presentation:
-    container_name: presentation
+    container_name: presentations
     build: ./services/presentations
+    links:
+      - mongo
+    environment:
+      MONGO_URL: "mongodb://mongo/chupiflum"
+
+  machine:
+    container_name: machines
+    build: ./services/machines
     links:
       - mongo
     environment:
@@ -50,7 +58,8 @@ services:
     environment:
       MONGO_URL: "mongodb://mongo/chupiflum"
       USER_URL: "http://users:3000"
-      CATEGORY_URL: "http://category:3001"
-      UNIT_URL: "http://unit:3002"
-      PRESENTATION_URL: "http://presentation:3003"
+      CATEGORY_URL: "http://categories:3001"
+      UNIT_URL: "http://units:3002"
+      PRESENTATION_URL: "http://presentations:3003"
+      MACHINE_URL: "http://machines:3004"
       SEND_GRID_API_KEY: "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"

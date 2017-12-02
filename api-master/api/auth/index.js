@@ -60,19 +60,22 @@ class SetupAuth {
 
     // login user
     this.app.post('/login', db( async (req, res, next) => {
-      const {email, password} = req.body;
+      const {username, password} = req.body;
       const {Model} = req;
       //search user
-      Model.findOne({ email }).then((user) => {
+      Model.findOne({ username }).then((user) => {
+
+        if (!user) return res.status(404).send("Usuario o cotrasena invalidos");
+
         //compare passwords
         user.comparePassword(password, (err, isMatch) => {
           //server error
           if (err) return res.status(500).send("internal server error");
 
-          if (!isMatch) return res.status(404).send("invalid password");
+          if (!isMatch) return res.status(404).send("Usuario o cotrasena invalidos");
 
           //create token
-          const token = jwt.sign({ email: user.email }, config.jwtSecret)
+          const token = jwt.sign({ email: user.email }, config.secretToken);
 
           //send token and message
           return res.status(200).send({
@@ -125,7 +128,29 @@ class SetupAuth {
       }catch(error){
         res.status(500).send({message: "internal server error"})
       }
-    })
+    });
+
+    this.app.post('/register-password/:token', db(async(req, res) => {
+      const {Model} = req;
+      const {username, password } = req.body;
+      const {token} = req.params;
+      const decode = jwt.decode(token, {complete: true});
+      const {email} = decode.payload;
+      try{
+        if (!username || !password) res.status(400).send({message: 'El usuario y la contasena son obligatorios'});
+        const user = await Model.findOne({email});
+        console.log('user', user)
+        if(!user) res.status(404).send({message: "El usuario no existe"});
+        user.password = password;
+        user.username = username;
+        user.status = 'ACTIVE';
+        await user.save();
+        res.status(200).send(user);
+      }catch(error){
+        console.log('error', error)
+        res.status(500).send({message: "Error en el servidor"})
+      }
+    }));
 
     this.app.post('/reset-password', async(req, res) => {
       // const {email} = req.body;

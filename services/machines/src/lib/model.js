@@ -1,31 +1,25 @@
-const mongoose = require('mongoose');
 
-const CODES = ['PRODUCT', 'MATERIAL'];
-const STATUS = ['ACTIVE', 'INACTIVE'];
+const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
 	name: {
 		type: String,
-		required: true,
+		unique: true,
+		required: true
 	},
 	description: {
-		type: String,
-		required: true,
+		type: String
 	},
-	code: {
-		type: String,
-		enum: CODES,
-		required: true,
-		unique: true,
-		uppercase: true,
-		index: true
+	unit: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Unit',
+		required: true
 	},
-	status: {
-		type: String,
-		enum: STATUS,
-		default: STATUS[0]
+	capacity: {
+		type: Number,
+		required: true
 	}
-}, { timestamps: true });
+}, {timestamps: true});
 
 if (!schema.options.toJSON) schema.options.toJSON = {};
 
@@ -40,5 +34,7 @@ schema.options.toJSON.transform = (doc, ret) => {
 	return ret;
 };
 
-module.exports = mongoose.model('Category', schema);
+module.exports = mongoose.model('Machine', schema);
+
+
 
