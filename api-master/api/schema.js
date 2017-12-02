@@ -4,13 +4,15 @@ import { makeExecutableSchema } from 'graphql-tools';
 // import { withFilter } from 'graphql-subscriptions';
 // import { pubsub, CREATED_EVENT_TOPIC } from './subscriptions';
 
-//import user
+//import schemas and resolvers
 import userSchema from './users/schema';
 import userResolvers from './users/resolvers';
 import categorySchema from './categories/schema';
 import categoryResolvers from './categories/resolvers';
 import unitSchema from './units/schema';
 import unitResolvers from './units/resolvers';
+import presentationSchema from './presentations/schema';
+import presentationResolvers from './presentations/resolvers';
 
 const rootSchema = [`
   type Query {
@@ -40,10 +42,10 @@ const rootResolvers = {
 // Put schema together into one array of schema strings
 // and one map of resolvers, like makeExecutableSchema expects
 const schema = [
-  ...rootSchema, ...userSchema, ...categorySchema, ...unitSchema
+  ...rootSchema, ...userSchema, ...categorySchema, ...unitSchema, ...presentationSchema
 ];
 const resolvers = merge(
-  rootResolvers, userResolvers, categoryResolvers, unitResolvers
+  rootResolvers, userResolvers, categoryResolvers, unitResolvers, presentationResolvers
 );
 
 const executableSchema = makeExecutableSchema({
