@@ -1,10 +1,13 @@
 const Joi = require('joi');
 const { send, json } = require( 'micro' );
 
-// PROCESS 
+// PROCESS
 const schemaProcess = Joi.object({
   name: Joi.string().required(),
-})
+  description: Joi.string().optional(),
+  time: Joi.string().required(),
+  machine: Joi.string().required()
+});
 
 const validator = (schema) => fn => async (req, res, params) => {
   const body = await json(req)
@@ -20,4 +23,4 @@ const validator = (schema) => fn => async (req, res, params) => {
 
 module.exports = {
   validatorProcess : validator(schemaProcess),
-} 
+}
