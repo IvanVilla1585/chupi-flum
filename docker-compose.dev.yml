@@ -21,6 +21,10 @@ services:
     ports:
       - 3003:3003
 
+  machine:
+    ports:
+      - 3004:3004
+
   api-master:
     ports:
       - 8082:6379
