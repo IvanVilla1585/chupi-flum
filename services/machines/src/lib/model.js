@@ -1,6 +1,8 @@
 
 const mongoose = require('mongoose');
 
+const STATUS = ['ACTIVE', 'INACTIVE'];
+
 const schema = new mongoose.Schema({
 	name: {
 		type: String,
@@ -18,6 +20,11 @@ const schema = new mongoose.Schema({
 	capacity: {
 		type: Number,
 		required: true
+	},
+	status: {
+		type: String,
+		enum: STATUS,
+		default: STATUS[0]
 	}
 }, {timestamps: true});
 
