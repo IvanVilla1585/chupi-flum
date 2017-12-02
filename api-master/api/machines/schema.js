@@ -41,9 +41,9 @@ const schema = [`
   
   extend type Query {
     # fetch all machine
-    machines(status: STATUS): [Unit]
+    machines(status: STATUS): [Machine]
     # find unit by id
-    machineById(id: ID!): Unit
+    machineById(id: ID!): Machine
   }
   
   extend type Mutation {
@@ -54,7 +54,7 @@ const schema = [`
     # delete machine
     machineDelete(id: ID): Machine
     # update status machine
-    machineStatus(id: ID!, status:   String): Machine
+    machineStatus(id: ID!, status: STATUS): Machine
   }
 `];
 
