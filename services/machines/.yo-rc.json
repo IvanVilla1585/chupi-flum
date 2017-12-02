@@ -1,0 +1,8 @@
+{
+  "generator-microservice-mongo": {
+    "promptValues": {
+      "mongoURL": "mongodb://localhost/chupiflum",
+      "username": "IvanVilla1585"
+    }
+  }
+}
