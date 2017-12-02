@@ -20,6 +20,7 @@ import PresentationsConnector from './presentations/connector';
 import MachineConnector from './machines/connector';
 import ProcessConnector from './process/connector';
 import MaterialConnector from './materials/connector';
+import ProviderConnector from './providers/connector';
 
 import Email from '../email';
 import {SetupAuth} from './auth';
@@ -64,7 +65,8 @@ export function run(port: string | number) {
           presentationConnector: new PresentationsConnector(config.presentationUrl),
           machineConnector: new MachineConnector(config.machineUrl),
           processConnector: new ProcessConnector(config.processUrl),
-          materialConnector: new MaterialConnector(config.materialUrl)
+          materialConnector: new MaterialConnector(config.materialUrl),
+          providerConnector: new ProviderConnector(config.providerUrl)
         },
       };
     })

@@ -33,6 +33,10 @@ services:
     ports:
       - 3006:3006
 
+  provider:
+    ports:
+      - 3007:3007
+
   api-master:
     ports:
       - 8082:6379
