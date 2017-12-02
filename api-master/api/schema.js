@@ -13,6 +13,8 @@ import unitSchema from './units/schema';
 import unitResolvers from './units/resolvers';
 import presentationSchema from './presentations/schema';
 import presentationResolvers from './presentations/resolvers';
+import machineSchema from './machines/schema';
+import machineResolvers from './machines/resolvers';
 
 const rootSchema = [`
   type Query {
@@ -42,10 +44,10 @@ const rootResolvers = {
 // Put schema together into one array of schema strings
 // and one map of resolvers, like makeExecutableSchema expects
 const schema = [
-  ...rootSchema, ...userSchema, ...categorySchema, ...unitSchema, ...presentationSchema
+  ...rootSchema, ...userSchema, ...categorySchema, ...unitSchema, ...presentationSchema, ...machineSchema
 ];
 const resolvers = merge(
-  rootResolvers, userResolvers, categoryResolvers, unitResolvers, presentationResolvers
+  rootResolvers, userResolvers, categoryResolvers, unitResolvers, presentationResolvers, machineResolvers
 );
 
 const executableSchema = makeExecutableSchema({
