@@ -43,7 +43,7 @@ const schema = [`
     # delete presentation
     presentationDelete(id: ID): Presentation
     # update status presentation
-    presentationStatus(id: ID!, status:   String): Presentation
+    presentationStatus(id: ID!, status: STATUS): Presentation
   }
 `];
 
