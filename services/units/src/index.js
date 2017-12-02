@@ -83,7 +83,6 @@ hash.set('PUT /:id', db(async (req, res, params) => {
   */
 hash.set('DELETE /:id', db(async (req, res, params) => {
   const { Model } = req;
-  const data = { status: 'INACTIVE' };
 
   const resp = await Model.findById(params.id);
   await resp.remove();
@@ -101,8 +100,7 @@ hash.set('PUT /status/:id', db(async (req, res, params) => {
   const {status} = req.body;
   const data = { status };
 
-  const resp = await Model.findById(params.id);
-  await resp.remove();
+	const resp = await Model.findByIdAndUpdate(params.id, { $set: data }, { new: true });
 
   send(res, 200, resp);
 }));
