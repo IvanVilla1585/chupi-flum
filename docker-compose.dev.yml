@@ -29,6 +29,10 @@ services:
     ports:
       - 3005:3005
 
+  material:
+    ports:
+      - 3006:3006
+
   api-master:
     ports:
       - 8082:6379

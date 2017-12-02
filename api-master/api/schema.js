@@ -17,6 +17,8 @@ import machineSchema from './machines/schema';
 import machineResolvers from './machines/resolvers';
 import processSchema from './process/schema';
 import processResolvers from './process/resolvers';
+import materialSchema from './materials/schema';
+import materialResolvers from './materials/resolvers';
 
 const rootSchema = [`
   type Query {
@@ -46,10 +48,10 @@ const rootResolvers = {
 // Put schema together into one array of schema strings
 // and one map of resolvers, like makeExecutableSchema expects
 const schema = [
-  ...rootSchema, ...userSchema, ...categorySchema, ...unitSchema, ...presentationSchema, ...machineSchema, ...processSchema
+  ...rootSchema, ...userSchema, ...categorySchema, ...unitSchema, ...presentationSchema, ...machineSchema, ...processSchema, ...materialSchema
 ];
 const resolvers = merge(
-  rootResolvers, userResolvers, categoryResolvers, unitResolvers, presentationResolvers, machineResolvers, processResolvers
+  rootResolvers, userResolvers, categoryResolvers, unitResolvers, presentationResolvers, machineResolvers, processResolvers, materialResolvers
 );
 
 const executableSchema = makeExecutableSchema({

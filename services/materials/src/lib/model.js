@@ -17,7 +17,16 @@ const schema = new mongoose.Schema({
 		ref: 'Unit',
 		required: true
 	},
-	capacity: {
+	category: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Category',
+		required: true
+	},
+	quantity: {
+		type: Number,
+		default: 0
+	},
+	stock: {
 		type: Number,
 		required: true
 	},
@@ -41,7 +50,4 @@ schema.options.toJSON.transform = (doc, ret) => {
 	return ret;
 };
 
-module.exports = mongoose.model('Machine', schema);
-
-
-
+module.exports = mongoose.model('Material', schema);
