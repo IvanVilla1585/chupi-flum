@@ -37,11 +37,9 @@ const schema = [`
   
   extend type Query {
     # find all categories
-    categories: [Category]
+    categories(status: STATUS, code: String!): [Category]
     # find category by id
     categoryById(id: ID!): Category
-    # find category for products
-    categoryByCode(code: String!): [Category]
   }
   
   extend type Mutation {
@@ -52,7 +50,7 @@ const schema = [`
     # delete category
     categoryDelete(id: ID!): Category
     # update status category
-    categoryStatus(id: ID!, status: Boolean): Category
+    categoryStatus(id: ID!, status: STATUS): Category
   }
 `];
 
