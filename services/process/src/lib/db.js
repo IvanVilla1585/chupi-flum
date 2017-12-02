@@ -8,7 +8,7 @@ const db = fn => async(req, res, params) => {
 	const conn = await mongoose.createConnection(config.db, options);
 
 	// expose connection
-	req.Model = conn.model('PROCESS');
+	req.Model = conn.model('Process');
 
 	// close connection
 	res.on('finish', () => {
