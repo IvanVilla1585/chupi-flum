@@ -19,6 +19,7 @@ import UnitConnector from './units/connector';
 import PresentationsConnector from './presentations/connector';
 import MachineConnector from './machines/connector';
 import ProcessConnector from './process/connector';
+import MaterialConnector from './materials/connector';
 
 import Email from '../email';
 import {SetupAuth} from './auth';
@@ -62,7 +63,8 @@ export function run(port: string | number) {
           unitConnector: new UnitConnector(config.unitUrl),
           presentationConnector: new PresentationsConnector(config.presentationUrl),
           machineConnector: new MachineConnector(config.machineUrl),
-          processConnector: new ProcessConnector(config.processUrl)
+          processConnector: new ProcessConnector(config.processUrl),
+          materialConnector: new MaterialConnector(config.materialUrl)
         },
       };
     })
