@@ -1,11 +1,6 @@
 
 const schema = [`
 
-  enum STATUS {
-    ACTIVE,
-    INACTIVE
-  }
-
   # data to create unit
   input UnitInput {
     # unit name
@@ -38,6 +33,7 @@ const schema = [`
     description: String,
     # unit code
     code: String,
+    status: STATUS,
     # unit equivalence
     equivalence: Int,
     createdAt: String
