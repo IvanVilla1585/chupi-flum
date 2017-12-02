@@ -1,9 +1,18 @@
 const Joi = require('joi');
 const { send, json } = require( 'micro' );
 
-// PROVIDERS 
+// PROVIDERS
 const schemaProviders = Joi.object({
+  _id: Joi.string().required(),
   name: Joi.string().required(),
+  address: Joi.string().required(),
+  phone: Joi.string().required(),
+  fax: Joi.string().optional(),
+	companyEmail: Joi.string().optional(),
+	contactName: Joi.string().required(),
+	contactLastName: Joi.string().optional(),
+	contactPhone: Joi.string().required(),
+	contactEmail: Joi.string().optional()
 })
 
 const validator = (schema) => fn => async (req, res, params) => {
@@ -20,4 +29,4 @@ const validator = (schema) => fn => async (req, res, params) => {
 
 module.exports = {
   validatorProviders : validator(schemaProviders),
-} 
+}
