@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const CODES = ['PRODUCT', 'MATERIAL'];
+const STATUS = ['ACTIVE', 'INACTIVE'];
 
 const schema = new mongoose.Schema({
 	name: {
@@ -20,8 +21,9 @@ const schema = new mongoose.Schema({
 		index: true
 	},
 	status: {
-		type: Boolean,
-		default: true
+		type: String,
+		enum: STATUS,
+		default: STATUS[0]
 	}
 }, { timestamps: true });
 
