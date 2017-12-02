@@ -15,14 +15,6 @@ const resolvers = {
       if (res.errors || res.statusCode) throw new Error(res.messages);
 
       return res;
-    },
-
-    async categoryByCode(root: any, args: any, {categoryConnector}: any){
-      const res = await categoryConnector.get({code: args.code, status: true});
-
-      if (res.errors || res.statusCode) throw new Error(res.messages);
-
-      return res;
     }
   },
   Mutation: {
