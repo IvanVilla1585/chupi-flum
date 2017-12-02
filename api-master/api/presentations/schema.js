@@ -6,11 +6,7 @@ const schema = [`
     # presentation name
     name: String!,
     # presentation description
-    description: String,
-    # presentation code
-    code: String!,
-    # presentation equivalence
-    equivalence: Int!
+    description: String
   }
   
   # data to create presentation
@@ -18,42 +14,36 @@ const schema = [`
     # presentation name
     name: String,
     # presentation description
-    description: String,
-    # presentation code
-    code: String,
-    # presentation equivalence
-    equivalence: Int
+    description: String
   }
   
-  type presentation {
+  type Presentation {
     id: ID,
     # presentation name
     name: String,
     # presentation description
     description: String,
-    # presentation code
-    code: String,
-    # presentation equivalence
-    equivalence: Int,
+    # presentation status
+    status: STATUS,
     createdAt: String
   }
   
   extend type Query {
-    # fetch all presentations
-    units(status: STATUS): [Unit]
+    # fetch all presentation
+    presentations(status: STATUS): [Presentation]
     # find presentation by id
-    unitById(id: ID!): Unit
+    presentationById(id: ID!): Presentation
   }
   
   extend type Mutation {
     # create presentation
-    unitAdd(data: UnitInput): Unit
+    presentationAdd(data: PresentationInput): Presentation
     # update presentation
-    unitEdit(id: ID!, data: UnitEditInput): Unit
+    presentationEdit(id: ID!, data: PresentationEditInput): Presentation
     # delete presentation
-    unitDelete(id: ID): Unit
+    presentationDelete(id: ID): Presentation
     # update status presentation
-    unitStatus(id: ID!, status:   String): Unit
+    presentationStatus(id: ID!, status:   String): Presentation
   }
 `];
 

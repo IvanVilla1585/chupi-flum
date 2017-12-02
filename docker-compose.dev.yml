@@ -17,6 +17,10 @@ services:
     ports:
       - 3002:3002
 
+  presentation:
+    ports:
+      - 3003:3003
+
   api-master:
     ports:
       - 8082:6379

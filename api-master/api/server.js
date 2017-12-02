@@ -16,6 +16,7 @@ import { execute, subscribe } from 'graphql';
 import UserConnector from './users/connector';
 import CategoryConnector from './categories/connector';
 import UnitConnector from './units/connector';
+import PresentationsConnector from './presentations/connector';
 
 import Email from '../email';
 import {SetupAuth} from './auth';
@@ -56,7 +57,8 @@ export function run(port: string | number) {
           sendGrid: new Email(config.sengrig_api_key),
           userConnector: new UserConnector(config.userUrl),
           categoryConnector: new CategoryConnector(config.categoryUrl),
-          unitConnector: new UnitConnector(config.unitUrl)
+          unitConnector: new UnitConnector(config.unitUrl),
+          presentationConnector: new PresentationsConnector(config.presentationUrl)
         },
       };
     })

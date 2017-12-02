@@ -7,7 +7,7 @@ const ObjectID = require('mongodb').ObjectID;
 
 //decorators
 const db =  require( './lib/db' );
-const { validatorUnits } = require('./lib/validator');
+const { validatorPresentations } = require('./lib/validator');
 const visualize = require('micro-visualize');
 
 const config = require('./config');
@@ -15,7 +15,7 @@ const config = require('./config');
 const hash = HttpHash();
 
 /*
-  * UNITS  Query
+  * PRESENTATIONS  Query
   * GET /*
   * params: mongo stringify query
   *  - ?name=**&admin={$or:{ ***, *** }}
@@ -34,7 +34,7 @@ hash.set('GET /query/*', db(async (req, res, params) => {
 }));
 
 /*
-  * UNITS find by id
+  * PRESENTATIONS find by id
   * GET /:id
   * params: @id
   */
@@ -47,11 +47,11 @@ hash.set('GET /:id', db(async (req, res, params) => {
 }));
 
 /*
-  * UNITS Create
+  * PRESENTATIONS Create
   * POST /
-  * body: Units fields (see validator)
+  * body: Presentations fields (see validator)
   */
-hash.set('POST /', compose(validatorUnits, db)(async (req, res, params) => {
+hash.set('POST /', compose(validatorPresentations, db)(async (req, res, params) => {
 
   const { Model } = req;
   const data = await json(req);
@@ -61,7 +61,7 @@ hash.set('POST /', compose(validatorUnits, db)(async (req, res, params) => {
 }));
 
 /*
-  * UNITS Update
+  * PRESENTATIONS Update
   * POST /:id
   * params: @id
   * body: Dataset to update
@@ -77,32 +77,32 @@ hash.set('PUT /:id', db(async (req, res, params) => {
 }));
 
 /*
-  * UNITS delete
+  * PRESENTATIONS Delete
   * DELETE /:id
   * params: @id
   */
 hash.set('DELETE /:id', db(async (req, res, params) => {
   const { Model } = req;
 
-  const resp = await Model.findById(params.id);
-  await resp.remove();
+  const resp = await Model.findById(params.id)
+	await	resp.remove();
 
   send(res, 200, resp);
 }));
 
 /*
-  * UNITS Update status
+  * PRESENTATIONS Update status
   * PUT /status/:id
   * params: @id
   */
 hash.set('PUT /status/:id', db(async (req, res, params) => {
-  const { Model } = req;
-  const {status} = req.body;
-  const data = { status };
+	const { Model } = req;
+	const {status} = req.body;
+	const data = { status };
 
 	const resp = await Model.findByIdAndUpdate(params.id, { $set: data }, { new: true });
 
-  send(res, 200, resp);
+	send(res, 200, resp);
 }));
 
 /*

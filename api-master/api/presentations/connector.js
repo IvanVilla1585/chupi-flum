@@ -6,7 +6,7 @@ import BaseConnector from '../helpers/BaseConnector';
  * @extends BaseConnector
  * @class
  */
-export default class UnitConnector extends BaseConnector {
+export default class PresentationConnector extends BaseConnector {
   constructor(API_ROOT: string = '') {
     super(API_ROOT);
   }

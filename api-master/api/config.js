@@ -11,5 +11,6 @@ export default {
   userUrl: process.env.USER_URL || 'http://localhost:3000',
   categoryUrl: process.env.CATEGORY_URL || 'http://localhost:3001',
   unitUrl: process.env.UNIT_URL || 'http://localhost:3002',
+  presentationUrl: process.env.PRESENTATION_URL || 'http://localhost:3003',
   sengridApiKey: process.env.SENGRID_API_KEY || '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'
 };
