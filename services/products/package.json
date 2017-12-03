@@ -6,8 +6,8 @@
   "repository": "IvanVilla1585/products",
   "license": "MIT",
   "scripts": {
-    "start": "micro src/index.js",
-    "dev": "nodemon src/index.js --watch src/ --exec micro --ignore test.js",
+    "start": "micro src/index.js -p 3008",
+    "dev": "nodemon src/index.js --watch src/ --exec micro -p 3008 --ignore test.js",
     "test": "xo && ava"
   },
   "engines": {
