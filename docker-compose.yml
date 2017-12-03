@@ -76,6 +76,14 @@ services:
     environment:
       MONGO_URL: "mongodb://mongo/chupiflum"
 
+  product:
+    container_name: products
+    build: ./services/products
+    links:
+      - mongo
+    environment:
+      MONGO_URL: "mongodb://mongo/chupiflum"
+
   api-master:
     container_name: api-master
     build: ./api-master
@@ -89,4 +97,5 @@ services:
       PROCESS_URL: "http://process:3005"
       MATERIAL_URL: "http://materials:3006"
       PROVIDER_URL: "http://providers:3007"
+      PRODUCT_URL: "http://products:3008"
       SEND_GRID_API_KEY: "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"

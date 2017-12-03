@@ -37,6 +37,10 @@ services:
     ports:
       - 3007:3007
 
+  product:
+    ports:
+      - 3008:3008
+
   api-master:
     ports:
       - 8082:6379
