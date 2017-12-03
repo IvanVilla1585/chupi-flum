@@ -16,5 +16,6 @@ export default {
   processUrl: process.env.PROCESS_URL || 'http://localhost:3005',
   materialUrl: process.env.MATERIAL_URL || 'http://localhost:3006',
   providerUrl: process.env.PROVIDER_URL || 'http://localhost:3007',
+  productUrl: process.env.PRODUCT_URL || 'http://localhost:3008',
   sengridApiKey: process.env.SENGRID_API_KEY || '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'
 };
