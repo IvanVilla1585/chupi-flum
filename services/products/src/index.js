@@ -22,13 +22,32 @@ const hash = HttpHash();
   *  - ?_id=**
   */
 hash.set('GET /query/*', db(async (req, res, params) => {
-  const { Model } = req;
+  const { ModelProduct } = req;
   const query = parse(req.url, true).query; // get query strings
 
   // eslint-disable-next-line
   for (const i in query) query[i] = JSON.parse(unescape(query[i])); // parse query to object
 
-  const records = await Model.find(query);
+  const records = await ModelProduct.find(query);
+
+  send(res, 200, records);
+}));
+
+/*
+  * FORMULA  Query
+  * GET /*
+  * params: mongo stringify query
+  *  - ?name=**&admin={$or:{ ***, *** }}
+  *  - ?_id=**
+  */
+hash.set('GET /formula/*', db(async (req, res, params) => {
+  const { ModelFormula } = req;
+  const query = parse(req.url, true).query; // get query strings
+
+  // eslint-disable-next-line
+  for (const i in query) query[i] = JSON.parse(unescape(query[i])); // parse query to object
+
+  const records = await ModelFormula.find(query);
 
   send(res, 200, records);
 }));
@@ -39,9 +58,9 @@ hash.set('GET /query/*', db(async (req, res, params) => {
   * params: @id
   */
 hash.set('GET /:id', db(async (req, res, params) => {
-	const { Model } = req;
+	const { ModelProduct } = req;
 
-	const resp = await Model.findById(params.id);
+	const resp = await ModelProduct.findById(params.id);
 
 	send(res, 200, resp);
 }));
@@ -53,39 +72,76 @@ hash.set('GET /:id', db(async (req, res, params) => {
   */
 hash.set('POST /', compose(validatorProducts, db)(async (req, res, params) => {
 
-  const { Model } = req;
+  const { ModelProduct, ModelFormula } = req;
   const data = await json(req);
-  const resp = await new Model(data).save();
+  const {formula} = data;
+  delete data.formula;
+  const product = await ModelProduct.findOne({name: data.name, presentation: data.presentation});
 
+  if (product) throw new Error('Ya existe un producto con el mismo nombre y presentacion');
+
+  const resp = await new ModelProduct(data).save();
+
+	resp.formula = insertFormula(resp, formula, ModelFormula);
   send(res, 200, resp);
 }));
 
+const insertFormula = async (resp, array, model) => {
+	let formula = [];
+	for(let i = 0; i < array.length; i++) {
+		let product = array[i];
+		product.product = resp._id;
+		const materia = await new model(product).save();
+		formula.push(materia);
+	};
+	return formula;
+};
+
 /*
   * PRODUCTS Update
-  * POST /:id
+  * PUT /:id
   * params: @id
   * body: Dataset to update
   */
 hash.set('PUT /:id', db(async (req, res, params) => {
-  const { Model } = req;
+  const { ModelProduct, ModelFormula } = req;
   const data = await json(req);
+	const {formula} = data;
+	delete data.formula;
   delete data._id;
 
-  const resp = await Model.findByIdAndUpdate(params.id, { $set: data }, { new: true });
+  const resp = await ModelProduct.findByIdAndUpdate(params.id, { $set: data }, { new: true });
+
+	await ModelFormula.remove({product: resp._id});
+	resp.formula = await insertFormula(resp, formula, ModelFormula);
 
   send(res, 200, resp);
 }));
 
 /*
-  * PRODUCTS Update status (INACTIVE)
+  * PRODUCTS Update status
+  * PUT /status/:id
+  * params: @id
+  */
+hash.set('PUT /status/:id', db(async (req, res, params) => {
+	const { ModelProduct } = req;
+	const data = await json(req);
+
+	const resp = await ModelProduct.findByIdAndUpdate(params.id, { $set: data }, { new: true });
+
+	send(res, 200, resp);
+}));
+
+/*
+  * PRODUCTS Delete
   * PUT /remove/:id
   * params: @id
   */
 hash.set('DELETE /:id', db(async (req, res, params) => {
-  const { Model } = req;
-  const data = { status: 'INACTIVE' };
+  const { ModelProduct } = req;
 
-  const resp = await Model.findById(params.id).remove();
+  const resp = await ModelProduct.findById(params.id);
+  await resp.remove();
 
   send(res, 200, resp);
 }));
